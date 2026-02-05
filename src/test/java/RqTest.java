@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RqTest {
 
     @Test
-    @DisplayName(value = "명령: 삭제?id=1 일때, rq.getActionName() - 삭제")
+    @DisplayName(value = "명령: 삭제?id=1 일 때, rq.getActionName() - 삭제")
     void t1() {
         Rq rq = new Rq("삭제?id=1");
         String actionName = rq.getActionName();
@@ -14,7 +14,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 수정?id=1 일때, rq.getActionName() - 수정")
+    @DisplayName(value = "명령: 수정?id=1 일 때, rq.getActionName() - 수정")
     void t2() {
         Rq rq = new Rq("수정?id=1");
         String actionName = rq.getActionName();
@@ -22,7 +22,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 목록?keyword=자바 일때, rq.getParam(\"kewyord\") -> \"자바\"")
+    @DisplayName(value = "명령: 목록?keyword=자바 일 때, rq.getParam(\"kewyord\") -> \"자바\"")
     void t3() {
         Rq rq = new Rq("목록?keyword=자바");
         String rst = rq.getParam("keyword");
@@ -30,7 +30,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 목록?keywordType=title 일때, rq.getParam(\"kewyordType\") -> \"title\"")
+    @DisplayName(value = "명령: 목록?keywordType=title 일 때, rq.getParam(\"kewyordType\") -> \"title\"")
     void t4() {
         Rq rq = new Rq("목록?keywordType=title");
         String rst = rq.getParam("keywordType");
@@ -38,7 +38,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 목록?keyword=자바&keywordType=title 일때, rq.getParam(\"kewyordType\") -> \"title\"")
+    @DisplayName(value = "명령: 목록?keyword=자바&keywordType=title 일 때, rq.getParam(\"kewyordType\") -> \"title\"")
     void t5() {
         Rq rq = new Rq("목록?keyword=자바&keywordType=title");
         String rst = rq.getParam("keywordType");
@@ -46,7 +46,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 목록?page=1 일때, rq.getParamAsInt(\"page\") -> 1")
+    @DisplayName(value = "명령: 목록?page=1 일 때, rq.getParamAsInt(\"page\") -> 1")
     void t6() {
         Rq rq = new Rq("목록?page=1");
         int rst = rq.getParamAsInt("page", -1);
@@ -54,7 +54,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 목록?page=10 일때, rq.getParamAsInt(\"page\") -> 10")
+    @DisplayName(value = "명령: 목록?page=10 일 때, rq.getParamAsInt(\"page\") -> 10")
     void t7() {
         Rq rq = new Rq("목록?page=10");
         int rst = rq.getParamAsInt("page", -1);
@@ -62,7 +62,7 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 목록?keyword=자바&keywordType=title&page=1 일때, rq.getParam(\"kewyordType\") -> \"title\"")
+    @DisplayName(value = "명령: 목록?keyword=자바&keywordType=title&page=1 일 때, rq.getParam(\"kewyordType\") -> \"title\"")
     void t8() {
         Rq rq = new Rq("목록?keyword=자바&keywordType=title&page=1");
         String rst = rq.getParam("keywordType");
@@ -70,10 +70,18 @@ public class RqTest {
     }
 
     @Test
-    @DisplayName(value = "명령: 삭제?id=aaa 일때, rq.getParam(\"id\", -1) -> -1")
+    @DisplayName(value = "명령: 삭제?id=aaa 일 때, rq.getParam(\"id\", -1) -> -1")
     void t9() {
         Rq rq = new Rq("삭제?id=aaa");
         int rst = rq.getParamAsInt("id", -1);
         assertThat(rst).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName(value = "명령: 목록?keyword=자바 일 때, rq.getParam(\"keywordType\", \"\") -> \"\"")
+    void t10() {
+        Rq rq = new Rq("목록?keyword=자바");
+        String rst = rq.getParam("keywordType", "");
+        assertThat(rst).isEqualTo("");
     }
 }
